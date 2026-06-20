@@ -1,3 +1,6 @@
+import { largeFont, smallFont, gothic, hoverRed } from '../../theme';
+import { t } from '../../i18n';
+
 export class SinglePlayerMenu extends Phaser.Scene {
 
     constructor() {
@@ -17,20 +20,8 @@ export class SinglePlayerMenu extends Phaser.Scene {
         this.add.image(0, 0, 'MainBackground').setOrigin(0);
         this.panel = this.add.tileSprite(180, 16, 0, 0, 'Panels2Atlas', 'stonePanel').setOrigin(0);
 
-        this.largeFont = {
-            font: '32px Gothic',
-            stroke: '#000000',
-            strokeThickness: 0,
-            fill: '#000000',
-            align: 'center'
-        };
-        this.smallFont = {
-            font: '20px Gothic',
-            stroke: '#000000',
-            strokeThickness: 0,
-            fill: '#000000',
-            align: 'center'
-        };
+        this.largeFont = largeFont;
+        this.smallFont = smallFont;
 
         this.SinglePlayer();
         // this.SingleOrMultiPlayer();
@@ -78,27 +69,29 @@ export class SinglePlayerMenu extends Phaser.Scene {
         this.drawBox(224, 235, localText);
 
 
-        localText[localText.length] = this.add.text(250, 45, 'Your Options', this.largeFont);
+        // polices originales : titre FNTL2_22, boutons FNTL2_14 centrés
+        // sur les boîtes (224..415)
+        localText[localText.length] = gothic(this, 320, 48, t('sp.title'), 'large').setOrigin(0.5, 0);
 
-        localText[localText.length] = this.add.text(273, 92, 'Play Now!', this.smallFont).
-            setInteractive().on('pointerdown', function (pointer, localX, localY, event) {
+        localText[localText.length] = hoverRed(gothic(this, 320, 97, t('sp.playNow')).setOrigin(0.5, 0).setInteractive())
+            .on('pointerdown', function (pointer, localX, localY, event) {
                 that.scene.start('OrginalOrRoyalMenu');
             });
 
-        localText[localText.length] = this.add.text(266, 127, 'Load a game', this.smallFont);
+        localText[localText.length] = gothic(this, 320, 132, t('sp.loadGame')).setOrigin(0.5, 0);
 
-        localText[localText.length] = this.add.text(280, 163, 'Skirmish!', this.smallFont);
+        localText[localText.length] = gothic(this, 320, 168, t('sp.skirmish')).setOrigin(0.5, 0);
 
-        localText[localText.length] = this.add.text(264, 199, 'Custom game', this.smallFont).setInteractive().on('pointerdown', function (pointer, localX, localY, event) {
-            that.scene.start('CustomGame');
+        localText[localText.length] = hoverRed(gothic(this, 320, 204, t('sp.customGame')).setOrigin(0.5, 0).setInteractive())
+            .on('pointerdown', function (pointer, localX, localY, event) {
+                that.registry.set('newGameMode', 'custom');
+                that.scene.start('ShieldMenu');
+            });
 
-        });
-
-
-
-        localText[localText.length] = this.add.text(295, 235, 'Back', this.smallFont).style.setAlign('center').setInteractive().on('pointerdown', function (pointer, localX, localY, event) {
-            that.scene.start('MainMenu');
-        });
+        localText[localText.length] = hoverRed(gothic(this, 320, 240, t('common.back')).setOrigin(0.5, 0).setInteractive())
+            .on('pointerdown', function (pointer, localX, localY, event) {
+                that.scene.start('MainMenu');
+            });
     }
 
     MultiPlayer() {

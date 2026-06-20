@@ -4,7 +4,6 @@
  *
  *  The game instance settings.
  */
-const path = require('path');
 //  Import created game scenes.
 import * as scenes from './scenes';
 
@@ -50,6 +49,17 @@ export const type = Phaser.AUTO;
  *  Whether to disable antialiasing or not. Great for pixel art.
  */
 export const pixelArt = false;
+
+/**
+ *  Snap every draw call to whole pixels. Sans ça, un texte bitmap centré
+ *  (setOrigin(0.5, …)) dont la largeur est impaire retombe sur un
+ *  demi-pixel et le filtrage linéaire le rend flou — d'où des libellés de
+ *  menu inégalement nets (« Play Now! » net, les autres flous). Avec
+ *  roundPixels, tous les textes/sprites sont alignés sur des pixels
+ *  entiers → netteté uniforme. N'affecte pas l'échantillonnage des images
+ *  mises à l'échelle (le dézoom ×1,3 reste lissé).
+ */
+export const roundPixels = true;
 
 /**
  *  Whether to enable canvas transparency or not.
@@ -110,8 +120,9 @@ export const physics = {
  *  Global parameters of the asset manager.
  */
 export const loader = {
-  //  HINT: Put all your game assets in the `app/static/assets/` directory.
-  path: path.join(__static)
+  // Assets live in src/renderer/public and are served from the root ('') by Vite
+  // in dev and copied next to index.html in the production build.
+  path: ''
 };
 
 /**
@@ -181,7 +192,7 @@ export const plugins = {
  *  (`scene.sys.game.config`), under the keys `gameTitle`, `gameVersion` and
  *  `gameURL`, respectively.
  */
-export { title, version, homepage } from '@../../../package.json';
+export { title, version, homepage } from '../../package.json';
 
 /**
  *  Export created game scenes.

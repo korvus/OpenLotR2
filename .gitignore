@@ -23,10 +23,31 @@ $RECYCLE.BIN/
 # =========================
 node_modules/*
 
+out/
 dist/*
 !dist/.gitkeep
 release/*
 !release/.gitkeep
+tools/out/
 doc/_build/*
 static/docs/*
 .vscode/
+*.vsix
+yarn-error.log
+
+# Captures runtime du MCP lotr2 (transitoires ; les references retenues vont dans doc/captures/)
+doc/captures/runtime/
+
+# Planches et crops intermédiaires générés par les outils d'extraction
+src/renderer/public/images/scenes/MainScene/advanced-labor/inspect/
+src/renderer/public/images/scenes/MainScene/advanced-labor/_sheet.png
+
+# =========================
+# Environnement AI (local / personnel)
+# =========================
+# node_modules a TOUS les niveaux (le `node_modules/*` ci-dessus n'ancre que la racine)
+node_modules/
+# Config + memoire Codex : chemins absolus machine + memoire auto-mutante personnelle
+.codex/
+# Reglages Claude locaux a la machine (le settings.json partage, lui, peut etre versionne)
+.claude/settings.local.json

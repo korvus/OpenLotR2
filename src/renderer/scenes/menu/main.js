@@ -1,3 +1,6 @@
+import { largeFont, smallFont, gothic, hoverRed } from '../../theme';
+import { t } from '../../i18n';
+
 export class MainMenu extends Phaser.Scene {
 
     constructor() {
@@ -14,20 +17,8 @@ export class MainMenu extends Phaser.Scene {
         this.add.image(0, 0, 'MainBackground').setOrigin(0);
         this.panel = this.add.tileSprite(180, 16, 0, 0, 'Panels2Atlas', 'stonePanel').setOrigin(0);
 
-        this.largeFont = {
-            font: '32px Gothic',
-            stroke: '#000000',
-            strokeThickness: 0,
-            fill: '#000000',
-            align: 'center'
-        };
-        this.smallFont = {
-            font: '20px Gothic',
-            stroke: '#000000',
-            strokeThickness: 0,
-            fill: '#000000',
-            align: 'center'
-        };
+        this.largeFont = largeFont;
+        this.smallFont = smallFont;
 
         this.SingleOrMultiPlayer();
         // this.SelectShield();
@@ -67,14 +58,24 @@ export class MainMenu extends Phaser.Scene {
         // localText[localText.length] = this.add.line(0, 0, 225, 223, 415, 223, this.lineBottomColor).setOrigin(0);
 
 
-        localText[localText.length] = this.add.text(164 + 28, 29, 'Lords of the Realm 2', this.largeFont).setOrigin(0);
-        localText[localText.length] = this.add.text(164 + 72, 58, '"The seige is on"', this.smallFont).setOrigin(0);
+        // polices originales : titre en FNTL2_22, libellés en FNTL2_14,
+        // centrés sur le panneau (164..476) et les boîtes (224..415)
+        localText[localText.length] = gothic(this, 320, 30, t('menu.title'), 'large').setOrigin(0.5, 0);
+        localText[localText.length] = gothic(this, 320, 62, t('menu.tagline')).setOrigin(0.5, 0);
 
-        localText[localText.length] = this.add.text(264, 93, 'Single Player', this.smallFont).setInteractive().on('pointerdown', function (pointer, localX, localY, event) {
+        localText[localText.length] = hoverRed(gothic(this, 320, 97, t('menu.singlePlayer')).setOrigin(0.5, 0).setInteractive()).on('pointerdown', function (pointer, localX, localY, event) {
             for (var x in localText) {
                 localText[x].destroy();
             }
             that.scene.start('SinglePlayerMenu');
+        });
+
+        // Boîte du bas (199) : accès à l'écran d'options (choix de la langue).
+        localText[localText.length] = hoverRed(gothic(this, 320, 204, t('menu.options')).setOrigin(0.5, 0).setInteractive()).on('pointerdown', function (pointer, localX, localY, event) {
+            for (var x in localText) {
+                localText[x].destroy();
+            }
+            that.scene.start('OptionsMenu');
         });
 
     }
@@ -123,7 +124,7 @@ export class MainMenu extends Phaser.Scene {
                 for (var x in localText) {
                     localText[x].destroy();
                 }
-                that.scene.start('MainScene');
+                that.scene.start('Campaign');
             });
 
 
@@ -207,7 +208,8 @@ export class MainMenu extends Phaser.Scene {
         localText[localText.length] = this.add.text(280, 163, 'Skirmish!', this.smallFont);
 
         localText[localText.length] = this.add.text(264, 199, 'Custom game', this.smallFont).setInteractive().on('pointerdown', function (pointer, localX, localY, event) {
-            this.scene.scene.start('CustomGame');
+            this.scene.registry.set('newGameMode', 'custom');
+            this.scene.scene.start('ShieldMenu');
         });
 
 

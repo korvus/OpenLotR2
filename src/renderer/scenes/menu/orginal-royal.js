@@ -1,3 +1,7 @@
+import { largeFont, smallFont, gothic, hoverRed } from '../../theme';
+import { t } from '../../i18n';
+import { addStonePanel } from './stone-panel';
+
 export class OrginalOrRoyalMenu extends Phaser.Scene {
 
     constructor() {
@@ -12,22 +16,10 @@ export class OrginalOrRoyalMenu extends Phaser.Scene {
 
     create() {
         this.add.image(0, 0, 'MainBackground').setOrigin(0);
-        this.panel = this.add.tileSprite(180, 16, 0, 0, 'Panels2Atlas', 'stonePanel').setOrigin(0);
+        this.panel = null;
 
-        this.largeFont = {
-            font: '32px Gothic',
-            stroke: '#000000',
-            strokeThickness: 0,
-            fill: '#000000',
-            align: 'center'
-        };
-        this.smallFont = {
-            font: '20px Gothic',
-            stroke: '#000000',
-            strokeThickness: 0,
-            fill: '#000000',
-            align: 'center'
-        };
+        this.largeFont = largeFont;
+        this.smallFont = smallFont;
 
         this.OriginalOrSeige();
         // this.SelectShield();
@@ -46,10 +38,8 @@ export class OrginalOrRoyalMenu extends Phaser.Scene {
 
     OriginalOrSeige() {
 
-        this.panel.x = 68;
-        this.panel.y = 56;
-        this.panel.displayHeight = 117;
-        this.panel.displayWidth = 504;
+        if (this.panel) { this.panel.destroy(); }
+        this.panel = addStonePanel(this, 68, 56, 504, 117);
 
         var localText = [],
             that = this;
@@ -60,20 +50,22 @@ export class OrginalOrRoyalMenu extends Phaser.Scene {
         this.drawBox(366, 116, localText);
 
 
-        localText[localText.length] = this.add.text(98, 56 + 10, 'Expansion pack installed, choose:-', this.largeFont).setOrigin(0);
+        // polices originales : titre FNTL2_22, boutons FNTL2_14 centrés
+        // sur leurs boîtes (110..301 et 366..557)
+        localText[localText.length] = gothic(this, 320, 66, t('or.prompt'), 'large').setOrigin(0.5, 0);
 
-        localText[localText.length] = this.add.text(110, 120, 'Orginal campaign', this.smallFont).setOrigin(0).
-            setInteractive().on('pointerdown', function (pointer, localX, localY, event) {
+        localText[localText.length] = hoverRed(gothic(this, 206, 121, t('or.original')).setOrigin(0.5, 0).setInteractive())
+            .on('pointerdown', function (pointer, localX, localY, event) {
                 for (var x in localText) {
                     localText[x].destroy();
                 }
                 that.SelectShield();
-            });;
-        localText[localText.length] = this.add.text(365, 120, 'The new campaign', this.smallFont).setOrigin(0).
-            setInteractive().on('pointerdown', function (pointer, localX, localY, event) {
+            });
+        localText[localText.length] = hoverRed(gothic(this, 462, 121, t('or.new')).setOrigin(0.5, 0).setInteractive())
+            .on('pointerdown', function (pointer, localX, localY, event) {
 
                 that.scene.start('ShieldMenu');
-            });;
+            });
     }
 
     SinglePlayer() {
@@ -113,7 +105,8 @@ export class OrginalOrRoyalMenu extends Phaser.Scene {
         localText[localText.length] = this.add.text(280, 163, 'Skirmish!', this.smallFont);
 
         localText[localText.length] = this.add.text(264, 199, 'Custom game', this.smallFont).setInteractive().on('pointerdown', function (pointer, localX, localY, event) {
-            this.scene.scene.start('CustomGame');
+            this.scene.registry.set('newGameMode', 'custom');
+            this.scene.scene.start('ShieldMenu');
         });
 
 
@@ -123,5 +116,9 @@ export class OrginalOrRoyalMenu extends Phaser.Scene {
 
     MultiPlayer() {
 
+    }
+
+    SelectShield() {
+        this.scene.start('ShieldMenu');
     }
 }

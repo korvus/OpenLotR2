@@ -1,0 +1,31 @@
+{
+  "dos-wsl": {
+    "label": "DOS original ISOLE (WSL + Xvfb + xdotool) - ne vole pas la souris",
+    "installed": true,
+    "backend": "wsl",
+    "distro": "Ubuntu-20.04",
+    "process": "dosbox",
+    "note": "Backend isole par defaut : DOSBox tourne sur un display X virtuel dans WSL, l'input (xdotool) ne touche jamais la vraie souris. Paquets requis : dosbox xvfb xdotool scrot imagemagick x11-utils (cf. README)."
+  },
+  "dos": {
+    "label": "DOS original (DOSBox Windows embarque) - pilote la VRAIE souris",
+    "installed": true,
+    "backend": "win",
+    "command": "D:\\sites\\lordOfTheRealms\\lordsoftherealm2_dos_win\\Lords of the Realm 2\\DOSBOX\\DOSBox.exe",
+    "cwd": "D:\\sites\\lordOfTheRealms\\lordsoftherealm2_dos_win\\Lords of the Realm 2",
+    "bundledConf": "D:\\sites\\lordOfTheRealms\\lordsoftherealm2_dos_win\\Lords of the Realm 2\\DOSBOX\\dosbox.conf",
+    "confOverride": "conf/dos.conf",
+    "process": "DOSBox",
+    "windowMatch": "DOSBox"
+  },
+  "siege": {
+    "label": "Siege Pack (extension)",
+    "installed": false,
+    "note": "Non installe. Monter D:\\sites\\lordOfTheRealms\\extensionsSiegePack\\LOTR2-SP.iso puis installer, et ajouter ici command/cwd/conf."
+  },
+  "vf": {
+    "label": "Version francaise (VF)",
+    "installed": false,
+    "note": "Non installe. Lancer D:\\sites\\lordOfTheRealms\\vf\\setup-01361-Lords_of_the_Realm_II-PC.exe puis ajouter ici command/cwd/conf."
+  }
+}

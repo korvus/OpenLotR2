@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "lotr2": {
+      "command": "node",
+      "args": ["tools/mcp-lotr2/server.js"]
+    }
+  }
+}

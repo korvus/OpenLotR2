@@ -1,9 +1,11 @@
-import { app, BrowserWindow, remote, shell, screen } from "electron";
+import { app, BrowserWindow, shell, screen } from "electron";
 import { statSync } from "fs";
 import * as path from "path";
 const serve = require("electron-serve");
 
-const loadURL = serve({ directory: "renderer" });
+// Lazily initialised on first help-window open; calling serve() at module load
+// crashes because electron.app is not ready yet.
+let loadURL: any = null;
 declare const __static: string;
 
 interface LicenseEntry {
@@ -183,7 +185,10 @@ export default function openHelpWindow(
     info.win_options || {}
   );
 
-  window = new (BrowserWindow || remote.BrowserWindow)(options);
+  window = new BrowserWindow(options);
+  if (!loadURL) {
+    loadURL = serve({ directory: "renderer" });
+  }
   loadURL(window);
   window.webContents.openDevTools();
   window.once("closed", () => {
@@ -195,9 +200,9 @@ export default function openHelpWindow(
     e.preventDefault();
     shell.openExternal(url);
   });
-  window.webContents.on("new-window", (e, url) => {
-    e.preventDefault();
+  window.webContents.setWindowOpenHandler(({ url }) => {
     shell.openExternal(url);
+    return { action: "deny" };
   });
 
   //   window.webContents.once("dom-ready", () => {

@@ -1,3 +1,4 @@
+import { t } from '../i18n';
 
 export default class Intro extends Phaser.Scene {
 
@@ -18,7 +19,7 @@ export default class Intro extends Phaser.Scene {
     var loadingText = this.make.text({
         x: width / 2,
         y: height / 2 - 50,
-        text: 'Loading...',
+        text: t('loader.loading'),
         style: {
             font: '20px monospace',
             fill: '#ffffff'
@@ -57,7 +58,7 @@ export default class Intro extends Phaser.Scene {
     });
     
     this.load.on('fileprogress', function (file) {
-        assetText.setText('Loading asset: ' + file.key);
+        assetText.setText(t('loader.asset', { name: file.key }));
     });
 
     this.load.on('complete', function () {

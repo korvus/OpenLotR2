@@ -1,0 +1,170 @@
+[
+  {
+    "slot": 0,
+    "file": "map00.json",
+    "name": "England",
+    "counties": 15,
+    "terrainMax": 116
+  },
+  {
+    "slot": 1,
+    "file": "map01.json",
+    "name": "Scotland",
+    "counties": 11,
+    "terrainMax": 121
+  },
+  {
+    "slot": 2,
+    "file": "map02.json",
+    "name": "Ireland",
+    "counties": 10,
+    "terrainMax": 117
+  },
+  {
+    "slot": 3,
+    "file": "map03.json",
+    "name": "France",
+    "counties": 17,
+    "terrainMax": 114
+  },
+  {
+    "slot": 4,
+    "file": "map04.json",
+    "name": "Germany",
+    "counties": 17,
+    "terrainMax": 121
+  },
+  {
+    "slot": 5,
+    "file": "map05.json",
+    "name": "Italy",
+    "counties": 13,
+    "terrainMax": 121
+  },
+  {
+    "slot": 6,
+    "file": "map06.json",
+    "name": "Europe",
+    "counties": 17,
+    "terrainMax": 119
+  },
+  {
+    "slot": 7,
+    "file": "map07.json",
+    "name": "Crusades",
+    "counties": 16,
+    "terrainMax": 120
+  },
+  {
+    "slot": 8,
+    "file": "map08.json",
+    "name": "Africa",
+    "counties": 17,
+    "terrainMax": 117
+  },
+  {
+    "slot": 9,
+    "file": "map09.json",
+    "name": "India",
+    "counties": 12,
+    "terrainMax": 115
+  },
+  {
+    "slot": 10,
+    "file": "map10.json",
+    "name": "China",
+    "counties": 17,
+    "terrainMax": 121
+  },
+  {
+    "slot": 11,
+    "file": "map11.json",
+    "name": "Jigsaw",
+    "counties": 13,
+    "terrainMax": 115
+  },
+  {
+    "slot": 12,
+    "file": "map12.json",
+    "name": "Rose",
+    "counties": 6,
+    "terrainMax": 114
+  },
+  {
+    "slot": 13,
+    "file": "map13.json",
+    "name": "Bullseye",
+    "counties": 9,
+    "terrainMax": 111
+  },
+  {
+    "slot": 14,
+    "file": "map14.json",
+    "name": "Crossroads",
+    "counties": 6,
+    "terrainMax": 120
+  },
+  {
+    "slot": 15,
+    "file": "map15.json",
+    "name": "Rorschach",
+    "counties": 10,
+    "terrainMax": 117
+  },
+  {
+    "slot": 16,
+    "file": "map16.json",
+    "name": "Centreville",
+    "counties": 8,
+    "terrainMax": 111
+  },
+  {
+    "slot": 17,
+    "file": "map17.json",
+    "name": "Quaintville",
+    "counties": 5,
+    "terrainMax": 118
+  },
+  {
+    "slot": 18,
+    "file": "map18.json",
+    "name": "Pretzelland",
+    "counties": 5,
+    "terrainMax": 114
+  },
+  {
+    "slot": 19,
+    "file": "map19.json",
+    "name": "N. England",
+    "counties": 7,
+    "terrainMax": 112
+  },
+  {
+    "slot": 20,
+    "file": "map20.json",
+    "name": "Equalizer",
+    "counties": 5,
+    "terrainMax": 117
+  },
+  {
+    "slot": 21,
+    "file": "map21.json",
+    "name": "RubixWorld",
+    "counties": 9,
+    "terrainMax": 108
+  },
+  {
+    "slot": 22,
+    "file": "map22.json",
+    "name": "Pentagon",
+    "counties": 5,
+    "terrainMax": 119
+  },
+  {
+    "slot": 23,
+    "file": "map23.json",
+    "name": "YinYang",
+    "counties": 7,
+    "terrainMax": 117
+  }
+]

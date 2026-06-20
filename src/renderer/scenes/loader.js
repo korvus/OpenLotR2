@@ -1,3 +1,4 @@
+import { t } from '../i18n';
 
 export default class Loader extends Phaser.Scene {
 
@@ -16,7 +17,7 @@ export default class Loader extends Phaser.Scene {
         var loadingText = this.make.text({
             x: width / 2,
             y: height / 2 + 110,
-            text: 'Loading...',
+            text: t('loader.loading'),
             style: {
                 font: '20px monospace',
                 fill: '#ffffff'
@@ -55,7 +56,7 @@ export default class Loader extends Phaser.Scene {
         });
 
         this.load.on('fileprogress', function (file) {
-            assetText.setText('Loading asset: ' + file.key);
+            assetText.setText(t('loader.asset', { name: file.key }));
         });
 
         this.load.on('complete', function () {
@@ -68,15 +69,22 @@ export default class Loader extends Phaser.Scene {
 
 
         this.load.image('ArmouryBackground', 'themes/classic/scenes/armoury/background.png');
-        this.load.atlas('blackArms', 'themes/classic/scenes/armoury/black/arms.png', 'themes/classic/scenes/armoury/arms.json');
-        this.load.atlas('blueArms', 'themes/classic/scenes/armoury/blue/arms.png', 'themes/classic/scenes/armoury/arms.json');
-        this.load.atlas('purpleArms', 'themes/classic/scenes/armoury/purple/arms.png', 'themes/classic/scenes/armoury/arms.json');
-        this.load.atlas('redArms', 'themes/classic/scenes/armoury/red/arms.png', 'themes/classic/scenes/armoury/arms.json');
-        this.load.atlas('yellowArms', 'themes/classic/scenes/armoury/yellow/arms.png', 'themes/classic/scenes/armoury/arms.json');
+        this.load.atlas('blackArms', 'themes/classic/scenes/armoury/black/arms.png', 'themes/classic/scenes/armoury/arms.json', null, Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
+        this.load.atlas('blueArms', 'themes/classic/scenes/armoury/blue/arms.png', 'themes/classic/scenes/armoury/arms.json', null, Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
+        this.load.atlas('purpleArms', 'themes/classic/scenes/armoury/purple/arms.png', 'themes/classic/scenes/armoury/arms.json', null, Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
+        this.load.atlas('redArms', 'themes/classic/scenes/armoury/red/arms.png', 'themes/classic/scenes/armoury/arms.json', null, Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
+        this.load.atlas('yellowArms', 'themes/classic/scenes/armoury/yellow/arms.png', 'themes/classic/scenes/armoury/arms.json', null, Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
         this.load.multiatlas('armoryTorch', 'themes/classic/scenes/armoury/torch.json');
 
         this.load.image('MainBackground', 'themes/classic/scenes/menu/main/Main.png');
-        this.load.atlas('Panels2Atlas', 'themes/classic/system/panels2.png', 'themes/classic/system/panels2.json');
+        // TexturePacker JSON array
+        this.load.atlas('Panels2Atlas', 'themes/classic/system/panels2.png', 'themes/classic/system/panels2.json', null, Phaser.Loader.TEXTURE_ATLAS_JSON_ARRAY);
+
+        // polices bitmap originales (FNTL2_9/14/22) — utilisées par tous
+        // les écrans via theme.gothic()
+        this.load.bitmapFont('lords2', 'fonts/lords2-14.png', 'fonts/lords2-14.xml');
+        this.load.bitmapFont('lords2-small', 'fonts/lords2-9.png', 'fonts/lords2-9.xml');
+        this.load.bitmapFont('lords2-big', 'fonts/lords2-22.png', 'fonts/lords2-22.xml');
 
     }
 

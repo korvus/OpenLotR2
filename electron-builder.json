@@ -19,15 +19,13 @@
     "!tslint.json"
   ],
   "win": {
-    "icon": "dist/static/favicon.ico",
+    "icon": "src/renderer/public/favicon.ico",
     "target": ["portable"]
   },
   "mac": {
-    "icon": "dist/static",
     "target": ["dmg"]
   },
   "linux": {
-    "icon": "dist/static",
     "target": ["AppImage"]
   }
 }

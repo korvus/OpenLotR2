@@ -1,9 +1,14 @@
+import { largeFont, smallFont, gothic, hoverRed } from '../../theme';
+import { t } from '../../i18n';
+import { addStonePanel } from './stone-panel';
+
 export class ShieldMenu extends Phaser.Scene {
 
     constructor() {
         super({ key: 'ShieldMenu' });
 
         this.name = '';
+        this.shield = 'purple';
     }
 
     preload() {
@@ -13,26 +18,16 @@ export class ShieldMenu extends Phaser.Scene {
     }
 
     create() {
+        this.name = this.registry.get('playerName') || t('shield.defaultName');
+        this.shield = this.registry.get('playerShield') || 'purple';
         // let input = document.createElement("input");
 
         // window.document.body.append(input);
         this.add.image(0, 0, 'MainBackground').setOrigin(0);
-        this.panel = this.add.tileSprite(180, 16, 0, 0, 'Panels2Atlas', 'stonePanel').setOrigin(0);
+        this.panel = null;
 
-        this.largeFont = {
-            font: '32px Gothic',
-            stroke: '#000000',
-            strokeThickness: 0,
-            fill: '#000000',
-            align: 'center'
-        };
-        this.smallFont = {
-            font: '20px Gothic',
-            stroke: '#000000',
-            strokeThickness: 0,
-            fill: '#000000',
-            align: 'center'
-        };
+        this.largeFont = largeFont;
+        this.smallFont = smallFont;
 
 
         this.SelectShield();
@@ -50,72 +45,79 @@ export class ShieldMenu extends Phaser.Scene {
     }
 
     SelectShield() {
-        // this.panel.angle = 90;
-        this.panel.x = 84;
-        this.panel.y = 16;
-        this.panel.displayHeight = 250;
-        this.panel.displayWidth = 490;
+        if (this.panel) { this.panel.destroy(); }
+        this.panel = addStonePanel(this, 84, 16, 490, 250);
 
-        var localText = [],
-            shields = {},
-            that = this;
+        const localText = [];
+        const shields = {};
+        const that = this;
 
         // Original 
         this.drawBox(110, 215, localText);
         // Seige
         this.drawBox(336, 215, localText);
 
-        localText[localText.length] = this.add.text(140, 40, 'Choose your title and shield.', this.largeFont).setOrigin(0);
+        // polices originales : titre FNTL2_22, boutons FNTL2_14 centrés
+        // sur leurs boîtes (110..301 et 336..527) — survol rouge du DOS
+        localText[localText.length] = gothic(this, 320, 42, t('shield.title'), 'large').setOrigin(0.5, 0);
 
-        localText[localText.length] = this.add.text(185, 215, 'Back', this.smallFont).setOrigin(0).
+        localText[localText.length] = hoverRed(gothic(this, 206, 220, t('common.back')).setOrigin(0.5, 0).
+            setInteractive().on('pointerdown', function (pointer, localX, localY, event) {
+                that.registry.remove('newGameMode');
+                that.scene.start('SinglePlayerMenu');
+            }));
+
+        localText[localText.length] = hoverRed(gothic(this, 432, 220, t('shield.continue')).setOrigin(0.5, 0).
             setInteractive().on('pointerdown', function (pointer, localX, localY, event) {
                 for (var x in localText) {
                     localText[x].destroy();
                 }
-                that.SelectShield();
-            });
+                that.registry.set('playerName', that.name);
+                that.registry.set('playerShield', that.shield);
+                window.Player.sheild = that.shield;
+                const next = that.registry.get('newGameMode') === 'custom'
+                    ? 'CustomGame'
+                    : 'Campaign';
+                that.registry.remove('newGameMode');
+                that.scene.start(next);
+            }));
 
-        localText[localText.length] = this.add.text(395, 215, 'Continue', this.smallFont).setOrigin(0).
-            setInteractive().on('pointerdown', function (pointer, localX, localY, event) {
-                for (var x in localText) {
-                    localText[x].destroy();
-                }
-                that.scene.start('MainScene');
-            });
 
+        // Draw the input-box background FIRST, then the name text on top,
+        // otherwise the stone panel hides what the player types.
+        this.add.tileSprite(320, 100, 224, 32, 'Panels2Atlas', 'stoneInput');
+        this.nameText = gothic(this, 320, 100, this.name).setOrigin(0.5);
+        this.nameText.setDepth(10);
 
-        this.add.tileSprite(320, 100, 0, 0, 'Panels2Atlas', 'stoneInput');
-        //.setInteractive().on('keypress', function (pointer, localX, localY, event) {
-        //  console.log(event);
-        //});
-
-        this.input.keyboard.on('keydown', function (event) {
-            console.log(event.key);
-
-            if (event !== 'undefined') {
-                let key = event.key
-                if (key === 'Backspace') {
-                    that.name = that.name.slice(0, -1);
-                }
-                else if (key === 'undefined') {
-
-                } else if (key.length === 1) {
-                    that.name += key;
-                }
-
-                console.log(that.name);
-
+        this.input.keyboard.removeAllListeners();
+        this.input.keyboard.on('keydown', (event) => {
+            const key = event.key;
+            if (!key) return;
+            if (key === 'Backspace') {
+                that.name = that.name.slice(0, -1);
+            } else if (key.length === 1) {
+                that.name += key;
             }
-
-
-
+            that.nameText.setText(that.name);
         });
 
-        shields.red = this.add.tileSprite(150, 140 + 30, 0, 0, 'Panels2Atlas', 'redActive');
-        shields.yellow = this.add.tileSprite(235, 140 + 30, 0, 0, 'Panels2Atlas', 'yellowActive');
-        shields.black = this.add.tileSprite(288 + 30, 140 + 30, 0, 0, 'Panels2Atlas', 'blackActive');
-        shields.purple = this.add.tileSprite(288 + 120, 140 + 30, 0, 0, 'Panels2Atlas', 'purpleActive');
-        shields.blue = this.add.tileSprite(288 + 210, 140 + 30, 0, 0, 'Panels2Atlas', 'blueActive');
+        // Clicking a shield selects it: the crown sits on top of the chosen
+        // one, like in the original game.
+        const shieldX = { red: 150, yellow: 235, black: 288 + 30, purple: 288 + 120, blue: 288 + 210 };
+        const shieldY = 140 + 30;
+
+        for (const color of Object.keys(shieldX)) {
+            shields[color] = this.add.tileSprite(shieldX[color], shieldY, 0, 0, 'Panels2Atlas', color + 'Active')
+                .setInteractive()
+                .on('pointerdown', () => {
+                    that.shield = color;
+                    that.crown.x = shieldX[color];
+                });
+        }
+
+        // tileSprite, not image: the atlas frames carry a TexturePacker pivot
+        // (0,0) that add.image honours, which shifts the sprite half a frame.
+        this.crown = this.add.tileSprite(shieldX[this.shield], shieldY - 45, 0, 0, 'Panels2Atlas', 'crown').setDepth(10);
     }
 
 }

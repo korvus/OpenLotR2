@@ -1,0 +1,220 @@
+{
+  "panel": {
+    "x": 66,
+    "y": 67
+  },
+  "sprites": {
+    "missing": {
+      "key": "labor-dos-missing",
+      "file": "labor-dos-missing.png",
+      "x": 287,
+      "y": 46,
+      "w": 14,
+      "h": 34
+    },
+    "wood-active": {
+      "key": "labor-dos-wood-active",
+      "file": "labor-dos-wood-active.png",
+      "x": 110,
+      "y": 169,
+      "w": 88,
+      "h": 94
+    },
+    "cattle-active": {
+      "key": "labor-dos-cattle-active",
+      "file": "labor-dos-cattle-active.png",
+      "x": 288,
+      "y": 3,
+      "w": 68,
+      "h": 87
+    },
+    "grain-inactive": {
+      "key": "labor-dos-grain-inactive",
+      "file": "labor-dos-grain-inactive.png",
+      "x": 121,
+      "y": 11,
+      "w": 94,
+      "h": 94
+    },
+    "grain-active": {
+      "key": "labor-dos-grain-active",
+      "file": "labor-dos-grain-active.png",
+      "x": 110,
+      "y": 8,
+      "w": 145,
+      "h": 120
+    },
+    "moving": {
+      "key": "labor-dos-moving",
+      "file": "labor-dos-moving.png",
+      "x": 182,
+      "y": 61,
+      "w": 29,
+      "h": 28
+    },
+    "surplus-inactive": {
+      "key": "labor-dos-surplus-inactive",
+      "file": "labor-dos-surplus-inactive.png",
+      "x": 124,
+      "y": 11,
+      "w": 106,
+      "h": 100
+    },
+    "reclaim-inactive": {
+      "key": "labor-dos-reclaim-inactive",
+      "file": "labor-dos-reclaim-inactive.png",
+      "x": 176,
+      "y": 93,
+      "w": 48,
+      "h": 94
+    },
+    "reclaim-active": {
+      "key": "labor-dos-reclaim-active",
+      "file": "labor-dos-reclaim-active.png",
+      "x": 0,
+      "y": 93,
+      "w": 130,
+      "h": 105
+    },
+    "smithy-active": {
+      "key": "labor-dos-smithy-active",
+      "file": "labor-dos-smithy-active.png",
+      "x": 18,
+      "y": 222,
+      "w": 52,
+      "h": 46
+    },
+    "smithy-inactive": {
+      "key": "labor-dos-smithy-inactive",
+      "file": "labor-dos-smithy-inactive.png",
+      "x": 38,
+      "y": 259,
+      "w": 82,
+      "h": 45
+    },
+    "castle-inactive": {
+      "key": "labor-dos-castle-inactive",
+      "file": "labor-dos-castle-inactive.png",
+      "x": 264,
+      "y": 151,
+      "w": 78,
+      "h": 100
+    },
+    "castle-active": {
+      "key": "labor-dos-castle-active",
+      "file": "labor-dos-castle-active.png",
+      "x": 250,
+      "y": 143,
+      "w": 108,
+      "h": 116
+    },
+    "iron-active": {
+      "key": "labor-dos-iron-active",
+      "file": "labor-dos-iron-active.png",
+      "x": 58,
+      "y": 32,
+      "w": 44,
+      "h": 74
+    },
+    "stone-active": {
+      "key": "labor-dos-stone-active",
+      "file": "labor-dos-stone-active.png",
+      "x": 46,
+      "y": 19,
+      "w": 48,
+      "h": 70
+    }
+  },
+  "units": {
+    "missing": {
+      "key": "labor-unit-missing",
+      "file": "labor-unit-missing.png",
+      "w": 9,
+      "h": 31
+    },
+    "wood": {
+      "key": "labor-unit-wood",
+      "file": "labor-unit-wood.png",
+      "w": 15,
+      "h": 30
+    },
+    "cattle": {
+      "key": "labor-unit-cattle",
+      "file": "labor-unit-cattle.png",
+      "w": 16,
+      "h": 27
+    },
+    "grain": {
+      "key": "labor-unit-grain",
+      "file": "labor-unit-grain.png",
+      "w": 28,
+      "h": 47
+    },
+    "grain-active": {
+      "key": "labor-unit-grain-active",
+      "file": "labor-unit-grain-active.png",
+      "w": 16,
+      "h": 28
+    },
+    "moving": {
+      "key": "labor-unit-moving",
+      "file": "labor-unit-moving.png",
+      "w": 25,
+      "h": 24
+    },
+    "surplus-inactive": {
+      "key": "labor-unit-surplus-inactive",
+      "file": "labor-unit-surplus-inactive.png",
+      "w": 15,
+      "h": 24
+    },
+    "inactive": {
+      "key": "labor-unit-inactive",
+      "file": "labor-unit-inactive.png",
+      "w": 28,
+      "h": 48
+    },
+    "reclaim-active": {
+      "key": "labor-unit-reclaim-active",
+      "file": "labor-unit-reclaim-active.png",
+      "w": 32,
+      "h": 42
+    },
+    "iron": {
+      "key": "labor-unit-iron",
+      "file": "labor-unit-iron.png",
+      "w": 28,
+      "h": 42
+    },
+    "stone": {
+      "key": "labor-unit-stone",
+      "file": "labor-unit-stone.png",
+      "w": 16,
+      "h": 31
+    },
+    "smithy-active": {
+      "key": "labor-unit-smithy-active",
+      "file": "labor-unit-smithy-active.png",
+      "w": 16,
+      "h": 31
+    },
+    "smithy-inactive": {
+      "key": "labor-unit-smithy-inactive",
+      "file": "labor-unit-smithy-inactive.png",
+      "w": 32,
+      "h": 24
+    },
+    "castle-inactive": {
+      "key": "labor-unit-castle-inactive",
+      "file": "labor-unit-castle-inactive.png",
+      "w": 28,
+      "h": 48
+    },
+    "castle-active": {
+      "key": "labor-unit-castle-active",
+      "file": "labor-unit-castle-active.png",
+      "w": 18,
+      "h": 29
+    }
+  }
+}

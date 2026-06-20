@@ -9,18 +9,18 @@ import {
 } from "electron";
 import * as path from "path";
 import * as url from "url";
-const pkg = require("@/../../package.json");
+import pkg from "../../package.json";
 const settings = require("electron-settings");
 const server = require("electron-serve");
 const openAboutWindow = require("about-window").default;
 const openHelpWindow = require("./help").default;
 declare const __static: string;
 
-let window, serve;
-const args = process.argv.slice(1);
-serve = args.some(val => val === "--serve");
-
-serve = process.env.hasOwnProperty("ELECTRON_WEBPACK_WDS_PORT");
+let window;
+// In dev, electron-vite serves the renderer from a local dev server and exposes
+// its URL here. In production we load the built HTML from disk.
+const rendererDevUrl = process.env["ELECTRON_RENDERER_URL"];
+const serve = !!rendererDevUrl;
 
 function createWindow() {
   const electronScreen = screen;
@@ -35,12 +35,14 @@ function createWindow() {
     height: 570,
     webPreferences: {
       nodeIntegration: true,
+      contextIsolation: false,
       webSecurity: false
     }
   });
 
   const menu = Menu.getApplicationMenu();
 
+  try {
   // menu.append(
   //   new MenuItem({
   //     label: "MenuItem1",
@@ -83,6 +85,9 @@ function createWindow() {
   );
 
   Menu.setApplicationMenu(menu);
+  } catch (e) {
+    console.error("[menu] skipped custom menu wiring:", e && e.message);
+  }
 
   // protocol.interceptFileProtocol(
   //   "file",
@@ -98,13 +103,11 @@ function createWindow() {
   // console.log(process.env.ELECTRON_WEBPACK_WDS_PORT);
 
   if (serve) {
-    window.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}`);
-  } else {
-    window.loadURL("file://" + __dirname + "/index.html");
-  }
-
-  if (serve) {
+    window.loadURL(rendererDevUrl);
     window.webContents.openDevTools();
+  } else {
+    // Built layout: out/main/index.js -> out/renderer/index.html
+    window.loadFile(path.join(__dirname, "../renderer/index.html"));
   }
 
   // Emitted when the window is closed.
